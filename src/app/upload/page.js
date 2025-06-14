@@ -52,6 +52,7 @@ export default function CameraPage() {
       <video
         ref={videoRef}
         className="absolute top-1/2 left-19/40 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[300px] object-cover rounded-2xl shadow-2xl"
+        style={{width:624, height:300}}
         autoPlay
         playsInline
         muted
