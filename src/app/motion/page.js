@@ -129,14 +129,14 @@ export default function HandLandmarkerComponent() {
   return (
     <div className="relative w-full h-screen bg-[url('/mockup_02-a.png')] bg-cover bg-center">
       <video ref={videoRef} style={{ display: "none" }} />
-      {/* <canvas
+      <canvas
         ref={canvasRef}
         className="absolute top-1/2 left-19/40 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[340px] object-cover rounded-2xl shadow-2xl"
         style={{
           width:624, height:100,
           display: "block",
         }}
-      /> */}
+      />
       <audio ref={audioRef} src="/third.mp3" preload="auto" />
       <button
         onClick={handleCapture}
