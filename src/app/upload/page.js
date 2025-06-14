@@ -1,7 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
@@ -29,23 +31,36 @@ export default function Home() {
 
       const data = await res.json();
       setResult(data);
-      console.log(data);
+      router.push("/motion");
     };
 
     upload();
   }, [file]); // file이 바뀔 때마다 실행
 
   return (
-    <main>
-      <h1>AI 예측 테스트</h1>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      {preview && <img src={preview} alt="preview" width={300} />}
-      {result && (
-        <>
-          <h2>결과</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
-        </>
-      )}
+    <main className="h-full w-full bg-[#CCD3D1]">
+      <div
+        className="w-full h-full"
+        style={{
+          backgroundImage: "url('/mockup_02-a.png')",
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
+        <input
+          id="hidden-file"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          // className="fixed bottom-0 w-full h-[120px]"
+          style={{ display: "none" }}
+        />
+        <label
+          htmlFor="hidden-file"
+          className="fixed bottom-0 w-full h-[120px]  cursor-pointer"
+        />
+        {/* {preview && <img src={preview} alt="preview" width={300} />} */}
+      </div>
     </main>
   );
 }
