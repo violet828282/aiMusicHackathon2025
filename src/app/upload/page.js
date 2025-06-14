@@ -57,7 +57,7 @@ export default function CameraPage() {
       />
       <button
         onClick={handleCapture}
-        className="absolute bottom-[30px] left-1/2 -translate-x-1/2 z-50 flex justify-center items-center w-[100px] h-[100px]">
+        className="absolute bottom-[60px] left-1/2 -translate-x-1/2 z-50 flex justify-center items-center w-[100px] h-[100px]">
         <img src="/camera_active.png" alt="카메라 버튼" />
       </button>
     </div>
