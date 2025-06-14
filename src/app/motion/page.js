@@ -137,7 +137,7 @@ export default function HandLandmarkerComponent() {
           display: "block",
         }}
       />
-      <audio ref={audioRef} src="/meow.mp3" preload="auto" />
+      <audio ref={audioRef} src="/third.mp3" preload="auto" />
       <button
         onClick={handleCapture}
         className="absolute top-[10px] right-[10px] z-50 flex justify-center items-center w-[100px] h-[100px]
