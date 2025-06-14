@@ -5,6 +5,17 @@ import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
 export default function HandLandmarkerComponent() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const video = videoRef.current;
+
+    if (canvas && video) {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+  }, []);
 
   useEffect(() => {
     let handLandmarker;
@@ -58,13 +69,13 @@ export default function HandLandmarkerComponent() {
         const canvasHeight = canvasRef.current.height;
 
         canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-        canvasCtx.drawImage(videoRef.current, 0, 0);
+        canvasCtx.drawImage(videoRef.current, 0, 0, canvasWidth, canvasHeight);
 
-        // 고양이 영역 (픽셀 좌표)
-        const xMin = 248.1916;
-        const xMax = 478.7289;
-        const yMin = 443.2561;
-        const yMax = 641.1315;
+        // ✅ 하드코딩된 고양이 좌표
+        const xMin = 328.683;
+        const yMin = 586.685;
+        const xMax = 632.44;
+        const yMax = 848.969;
 
         for (const hand of results.landmarks || []) {
           let insideCount = 0;
@@ -73,20 +84,20 @@ export default function HandLandmarkerComponent() {
             const px = point.x * canvasWidth;
             const py = point.y * canvasHeight;
 
-            // 화면에 점 그리기
             canvasCtx.beginPath();
             canvasCtx.arc(px, py, 5, 0, 2 * Math.PI);
             canvasCtx.fillStyle = "red";
             canvasCtx.fill();
 
-            // 고양이 박스 안에 있는지 체크
             if (px >= xMin && px <= xMax && py >= yMin && py <= yMax) {
               insideCount++;
             }
           }
-          if (insideCount > 0) {
-            console.log("aaaa");
-            window.alert("cat");
+
+          if (insideCount > 0 && audioRef.current) {
+            audioRef.current.play().catch((err) => {
+              console.warn("Audio play blocked:", err);
+            });
           }
         }
       }
@@ -97,10 +108,31 @@ export default function HandLandmarkerComponent() {
     init();
   }, []);
 
+  useEffect(() => {
+    const resizeCanvas = () => {
+      if (canvasRef.current) {
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
+      }
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    return () => window.removeEventListener("resize", resizeCanvas);
+  }, []);
+
   return (
     <div className="h-full w-full">
       <video ref={videoRef} style={{ display: "none" }} />
-      <canvas ref={canvasRef} width={640} height={480} />
+      <canvas
+        ref={canvasRef}
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "block",
+        }}
+      />
+      <audio ref={audioRef} src="/meow.mp3" preload="auto" />
     </div>
   );
 }
