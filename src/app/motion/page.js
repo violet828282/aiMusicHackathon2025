@@ -73,10 +73,10 @@ export default function HandLandmarkerComponent() {
         canvasCtx.drawImage(videoRef.current, 0, 0, canvasWidth, canvasHeight);
 
         // ✅ 하드코딩된 고양이 좌표
-        const xMin = 328.683;
-        const yMin = 586.685;
-        const xMax = 632.44;
-        const yMax = 848.969;
+        const yMin = 328.683;
+        const xMin = 586.685;
+        const yMax = 632.44;
+        const xMax = 848.969;
 
         for (const hand of results.landmarks || []) {
           let insideCount = 0;
