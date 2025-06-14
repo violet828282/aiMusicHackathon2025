@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
+  //This is AI endpoint.
   try {
     const requestBody = await req.json()
     const externalResponse = await fetch('url', {
