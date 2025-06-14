@@ -1,66 +1,65 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function CameraPage() {
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
   const router = useRouter();
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [result, setResult] = useState(null);
 
-  const handleFileChange = (e) => {
-    const selected = e.target.files?.[0];
-    if (selected) {
-      setFile(selected);
-      setPreview(URL.createObjectURL(selected));
-    }
-  };
-
-  // 이미지가 선택되면 자동 업로드
   useEffect(() => {
-    if (!file) return;
+    // 브라우저에서 카메라 접근 요청
+    const enableCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: "environment" } }, // 후면 카메라
+          audio: false,
+        });
 
-    const upload = async () => {
-      const formData = new FormData();
-      formData.append("image", file);
-
-      const res = await fetch("/api/proxy", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-      setResult(data);
-      router.push("/motion");
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+        }
+      } catch (err) {
+        console.error("카메라 접근 실패:", err);
+      }
     };
 
-    upload();
-  }, [file]); // file이 바뀔 때마다 실행
+    enableCamera();
+  }, []);
+
+  const handleCapture = () => {
+    // const video = videoRef.current;
+    // const canvas = canvasRef.current;
+
+    // if (!video || !canvas) return;
+
+    // canvas.width = video.videoWidth;
+    // canvas.height = video.videoHeight;
+
+    // const ctx = canvas.getContext("2d");
+    // ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // 캡처는 필요하지만 저장 안 하고 바로 이동
+    // const dataURL = canvas.toDataURL("image/png");
+
+    router.push("/motion");
+  };
 
   return (
-    <main className="h-full w-full bg-[#CCD3D1]">
-      <div
-        className="w-full h-full"
-        style={{
-          backgroundImage: "url('/mockup_02-a.png')",
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}>
-        <input
-          id="hidden-file"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          // className="fixed bottom-0 w-full h-[120px]"
-          style={{ display: "none" }}
-        />
-        <label
-          htmlFor="hidden-file"
-          className="fixed bottom-0 w-full h-[120px]  cursor-pointer"
-        />
-        {/* {preview && <img src={preview} alt="preview" width={300} />} */}
-      </div>
-    </main>
+    <div className="relative w-full h-screen bg-black">
+      <video
+        ref={videoRef}
+        className="w-full h-full object-cover"
+        autoPlay
+        playsInline
+        muted
+      />
+      <button
+        onClick={handleCapture}
+        className="absolute bottom-[30px] left-1/2 -translate-x-1/2 z-50 flex justify-center items-center w-[100px] h-[100px]">
+        <img src="/camera_active.png" alt="카메라 버튼" />
+      </button>
+    </div>
   );
 }
