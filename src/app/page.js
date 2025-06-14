@@ -26,7 +26,10 @@ export default function HandLandmarkerComponent() {
 
       if (navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: {
+            facingMode: { ideal: 'environment'}
+          },
+          audio: false
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
