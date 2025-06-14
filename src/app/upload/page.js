@@ -43,7 +43,7 @@ export default function CameraPage() {
     // 캡처는 필요하지만 저장 안 하고 바로 이동
     // const dataURL = canvas.toDataURL("image/png");
 
-    router.push("/motion");
+    router.replace("/motion");
   };
 
   return (
