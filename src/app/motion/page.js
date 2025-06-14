@@ -123,7 +123,7 @@ export default function HandLandmarkerComponent() {
   }, []);
 
   const handleCapture = () => {
-    router.push("/list");
+    window.close()
   };
 
   return (
