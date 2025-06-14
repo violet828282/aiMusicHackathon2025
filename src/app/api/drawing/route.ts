@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const data = await externalResponse.json()
 
-    // data schema를 보고 인메모리에 가지고있기.
+    // data schema를 보고 어딘가에 저장하든지 처리함
 
     return NextResponse.json(
       { message: 'Operation successful.'},
