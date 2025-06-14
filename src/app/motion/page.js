@@ -121,6 +121,10 @@ export default function HandLandmarkerComponent() {
     return () => window.removeEventListener("resize", resizeCanvas);
   }, []);
 
+  const handleCapture = () => {
+    window.close();
+  };
+
   return (
     <div className="h-full w-full">
       <video ref={videoRef} style={{ display: "none" }} />
@@ -133,6 +137,12 @@ export default function HandLandmarkerComponent() {
         }}
       />
       <audio ref={audioRef} src="/meow.mp3" preload="auto" />
+      <button
+        onClick={handleCapture}
+        className="absolute top-[10px] right-[10px] z-50 flex justify-center items-center w-[100px] h-[100px]
+        ">
+        <img src="/aa.png" alt="카메라 버튼" />
+      </button>
     </div>
   );
 }
