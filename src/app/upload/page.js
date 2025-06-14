@@ -44,7 +44,7 @@ export default function CameraPage() {
     // const dataURL = canvas.toDataURL("image/png");
 
     // router.replace("/motion");
-    window.open("https://2025aihackathon.vercel.app/upload");
+    window.open("https://2025aihackathon.vercel.app/motion");
   };
 
   return (
