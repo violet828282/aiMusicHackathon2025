@@ -133,7 +133,7 @@ export default function HandLandmarkerComponent() {
         ref={canvasRef}
         className="absolute top-1/2 left-19/40 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[340px] object-cover rounded-2xl shadow-2xl"
         style={{
-          width:624, height:100,
+          width:620, height:300,
           display: "block",
         }}
       />
