@@ -137,12 +137,12 @@ export default function HandLandmarkerComponent() {
         }}
       />
       <audio ref={audioRef} src="/meow.mp3" preload="auto" />
-      {/* <button
+      <button
         onClick={handleCapture}
         className="absolute top-[10px] right-[10px] z-50 flex justify-center items-center w-[100px] h-[100px]
         ">
         <img src="/aa.png" alt="카메라 버튼" />
-      </button> */}
+      </button>
     </div>
   );
 }
