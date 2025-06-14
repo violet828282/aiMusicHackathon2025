@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
-
+import { useRouter } from "next/navigation";
 export default function HandLandmarkerComponent() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -122,7 +123,7 @@ export default function HandLandmarkerComponent() {
   }, []);
 
   const handleCapture = () => {
-    window.close();
+    router.push("/list");
   };
 
   return (
