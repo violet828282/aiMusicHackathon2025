@@ -6,15 +6,6 @@ export default function HandLandmarkerComponent() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const result = JSON.parse(localStorage.getItem("aiResult"));
-  const cat1 = result.masks[0];
-  const bird = result.masks[1];
-  const circle2 = result.masks[2];
-  const circle3 = result.masks[3];
-  const circle4 = result.masks[4];
-  const circle5 = result.masks[5];
-  const circle6 = result.masks[6];
-
   useEffect(() => {
     let handLandmarker;
 
