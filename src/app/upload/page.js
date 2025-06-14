@@ -51,14 +51,14 @@ export default function CameraPage() {
     <div className="relative w-full h-screen bg-[url('/mockup_02-b.png')] bg-cover bg-center">
       <video
         ref={videoRef}
-        className="absolute top-1/2 left-19/40 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[340px] object-cover rounded-2xl shadow-2xl"
+        className="absolute top-1/2 left-19/40 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[300px] object-cover rounded-2xl shadow-2xl"
         autoPlay
         playsInline
         muted
       />
       <button
         onClick={handleCapture}
-        className="absolute bottom-[160px] right-5 z-50 flex justify-center items-center w-[140px] h-[100px]">
+        className="absolute bottom-[140px] right-2 z-50 flex justify-center items-center w-[130px] h-[100px]">
         <img src="/camera_active.png" alt="카메라 버튼" />
       </button>
     </div>
