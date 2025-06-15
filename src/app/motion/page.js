@@ -123,17 +123,17 @@ export default function HandLandmarkerComponent() {
   }, []);
 
   const handleCapture = () => {
-    router.push("/list");
+    window.close()
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="relative w-full h-screen bg-[url('/mockup_02-a.png')] bg-cover bg-center">
       <video ref={videoRef} style={{ display: "none" }} />
       <canvas
         ref={canvasRef}
+        className="absolute top-1/2 left-35/80 -translate-x-1/2 -translate-y-1/2 w-[76%] h-[340px] object-cover rounded-2xl shadow-2xl"
         style={{
-          width: "100vw",
-          height: "100vh",
+          width:593, height:300,
           display: "block",
         }}
       />
